@@ -1,0 +1,34 @@
+.resultados {
+    margin-top: 30px;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #3c1053;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #d36cff;
+}
+
+.resultados h2 {
+    color: #d36cff;
+    margin-bottom: 15px;
+}
+
+.resultados ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.resultados li {
+    margin-bottom: 12px;
+    color: #eee;
+}
+
+.resultados a {
+    color: #e0a3ff;
+    text-decoration: none;
+}
+
+.resultados a:hover {
+    text-decoration: underline;
+}
