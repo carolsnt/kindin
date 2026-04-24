@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import ResultList from "@/components/ResultList";
 import { connectSSE } from "@/lib/sse";
 
@@ -13,18 +13,19 @@ interface Result {
   author_raw?: string;
 }
 
-export default function SearchPage({ params }: { params: { id: string } }) {
+export default function SearchPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [results, setResults] = useState<Result[]>([]);
   const [status, setStatus] = useState<"running" | "done" | "error">("running");
 
   useEffect(() => {
-    if (params.id === "placeholder") {
+    if (id === "placeholder") {
       setStatus("done");
       return;
     }
 
     const close = connectSSE(
-      `/searches/${params.id}/events`,
+      `/searches/${id}/events`,
       {
         result: (data: unknown) => setResults((prev) => [...prev, data as Result]),
         done: () => setStatus("done"),
@@ -33,7 +34,7 @@ export default function SearchPage({ params }: { params: { id: string } }) {
     );
 
     return close;
-  }, [params.id]);
+  }, [id]);
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-10">
