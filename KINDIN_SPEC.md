@@ -33,7 +33,7 @@ Kindin é um app web para buscar livros (EPUB/MOBI/PDF) em fontes Telegram allow
 - **pydantic-settings** (configuração via env)
 
 ### Frontend
-- **Next.js 14** (App Router, TypeScript)
+- **Next.js 15** (App Router, TypeScript)
 - **TailwindCSS 3**
 - SSE nativo via `EventSource`
 
