@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kindin
+      POSTGRES_PASSWORD: kindin
+      POSTGRES_DB: kindin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  # api:
+  #   build:
+  #     context: ../apps/api
+  #     dockerfile: Dockerfile
+  #   env_file: ../apps/api/.env.example
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - postgres
+  #     - redis
+
+  # web:
+  #   build:
+  #     context: ../apps/web
+  #     dockerfile: Dockerfile
+  #   env_file: ../apps/web/.env.example
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - api
+
+volumes:
+  postgres_data:
